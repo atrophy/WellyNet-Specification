@@ -21,8 +21,9 @@ SOFTWARE
 	Messages beginning with ASCII « E » SHALL BE interpreted as an event
 	Messages beginning with ASCII « A » SHALL BE interpreted as an instruction
 	Messages beginning with ASCII « T » SHALL BE interpreted as a test
-	Messages MUST contain a 5 bit payload. Where the payload is not required 0x00 SHALL be transmitted for each bit.
+	Messages MUST contain a 5 bit payload. Where a payload is not needed by the application a null payload of 0x00 SHALL be transmitted for each bit.
 	Messages MUST contain a checksum byte at the end of transmission. The checksum MUST be calculated using a longitudinal redundancy check as described in ISO 1155
+	Messages MUST be exactly 10 bytes in length
 
 ELECTRICAL
 
