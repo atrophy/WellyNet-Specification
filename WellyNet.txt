@@ -1,0 +1,61 @@
+WellyNet
+
+	WellyNet is a design for a simple, asyncronous communications bus for use on
+	microcontroller devices that operates in a half duplex multi-master mode.
+
+	The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
+	NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and
+	"OPTIONAL" in this document are to be interpreted as described in
+	RFC 2119.
+
+SOFTWARE
+
+	Devices MUST start communications with an 8 bit destination address
+	Devices MUST NOT use 0 and 255 addresses
+	Devices MUST NOT attempt communications if the transmit activity line is high (do not disturb sign)
+	Devices MUST have a random or unique back off (10-100us)
+	Devices MUST communicate at 9600 bits per second (bps)
+	All devices MUST receive and interpret data addressed to 0x00
+	Devices MUST receive and interpret data sent to their addresses
+	Devices MAY receive and interpret data addressed to 255
+	Messages beginning with ASCII « E » SHALL BE interpreted as an event
+	Messages beginning with ASCII « A » SHALL BE interpreted as an instruction
+	Messages beginning with ASCII « T » SHALL BE interpreted as a test
+	Messages MUST contain a 5 bit payload. Where the payload is not required 0x00 SHALL be transmitted for each bit.
+	Messages MUST contain a checksum byte at the end of transmission. The checksum MUST be calculated using a longitudinal redundancy check as described in ISO 1155
+
+ELECTRICAL
+
+	Devices MUST use a 5V TTL (Transistor to Transistor Level)
+	Devices MAY draw up to 5mA
+	All devices with on-board regulation MUST NOT connect the VCC line to the on-board VCC (if devices requires on-board regulations, can use optical isolation)
+	Unused pins on the Header MUST BE put in a High impedance state
+	The bus MUST BE supplied with a stable 5V supply of at least 2A
+
+CONNECTOR
+
+	WellyNet devices MUST use the standard 6 pin header as shown in figure 1. This connector is identical electrically and mechanically to the AVR ISP, the port MAY be used for
+	both programming and WellyNet communications.
+
+	Figure 1:
+ 		        +-------+
+		TLK  ---|-O   O-|--  VCC
+		DND  -| |-O   O-|--  NC
+		NC   ---|-O   O-|--  GND
+		        +-------+
+NOTES
+Any digital line on the ATtiny can be used
+Header: Dest | Send
+NC: non-connected
+DND: do not disturb
+Rx → TLK (Talk): MISO
+Tx → NC: MOSI
+
+TO DO LIST
+Reference implementation board
+Create our library
+Create code list
+AVR ISP (6 pin header) diagram - 
+    
+   
+
